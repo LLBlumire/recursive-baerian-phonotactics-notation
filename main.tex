@@ -1,0 +1,77 @@
+\documentclass{scrartcl}
+
+\usepackage[a4paper, margin=1.3in]{geometry}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{libertine}
+\usepackage{relsize}
+\usepackage[UKenglish]{isodate}
+
+\newcommand{\nulls}[0]{\symbol{"2205}}
+
+\title{Recursive Baerian Phonotactics Notation}
+\author{L. L. Blumire}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\maketitle
+
+\vspace{-3em}
+\begin{center}
+Edited by Sascha M. Baer
+\end{center}
+\vspace{1em}
+
+
+Recursive Baerian\footnote{/ˈbɛɹiən/} Phonotactics Notation (A.K.A Baerian Notation, RBPN) was invented by Sascha M. Baer on the 1st May 2017 for describing the phonotactics of the constructed language `Qahfó'. It allows for rigorous but simple definitions, and is easily extensible.
+
+An example of it can be seen in this definition of the constructed language `Xekela':
+
+\[
+\#
+    \bigg[_{\hspace{0.2em}\omega}
+        \Big[_{\hspace{0.1em}\sigma}
+            \substack{\displaystyle \text{C  }\vspace{2pt}\\\displaystyle \text{PF  }} 
+            \substack{\displaystyle \text{V  }\vspace{2pt}\\\displaystyle \hspace{-2.5pt}\text{D}}
+            \substack{\displaystyle \text{C  }\vspace{2pt}\\\displaystyle \hspace{-2.5pt}\text{\nulls}}
+            \substack{\displaystyle \vspace{1pt}\\\mathlarger{\sigma}\vspace{3pt}\\\displaystyle \text{\nulls}\vspace{2pt}}
+        \Big]
+    \bigg]
+\# 
+\]
+
+Written inline\footnote{Inline notation designed by L. L. Blumire (author)} as $\#\left[_\omega \left[_\sigma \substack{\text{C}\\\text{P}\cdot\text{F}} \cdot \substack{\text{V}\\\text{D}} \cdot \substack{\text{C}\\\text{\nulls}} \cdot \substack{\sigma\\\text{\nulls}} \right] \right]\#$ where C is consonants, V is vowels, P is plosives, F is fricatives, and D is a specific set of diphthongs present in the language.
+
+This might be written under more traditional notation as C(C)V(V)(C), or under a slightly more useful notation\footnote{Regular expressions} as ((C|PF)(V|D)?(C)?)+.
+
+The notation has a number of components, the beginning definition $\#[$ which marks the start of a word, and $]\#$ which marks the end of a word. Bracket pairs mark blocks, every block is given an assigned variable. By convention the word level block is assigned $\omega$, foot level block is assigned $\varphi$, and syllable level blocks are assigned $\sigma$, such that $[_\alpha \ldots ]$ defines a block $\alpha$.
+
+Inside blocks, characters with predefined definitions are given, for example with C for consonant, and V for vowel. $\#[_\omega \text{C} \cdot \text{V} ]\#$ would define simple phonotactic system where all words are one syllable long and all are of the structure CV.
+
+To create optional consonants, or choices between possible subsets, choices are stacked. For example $\#\left[_\omega \substack{\text{C}\\\text{\nulls}} \cdot \text{V} \right]\#$ which would define (C)?V --- however still only allowing one syllable per word.
+
+To allow for multiple syllables per word, recursion can be used. $\#\left[_\omega \left[_\sigma \substack{\text{C}\\\text{\nulls}} \cdot \text{V} \cdot \substack{\sigma\\\text{\nulls}} \right] \right]\#$ describes ((C)?V)+ such that multiple syllables can occur in a word; the usage of $\sigma$ on the right hand side refers to a substitution of the block defined as $\sigma$ in the centre of the definition. This defines phonotactics for an optional initial consonant, followed by a vowel, repeated any number of times in a word.
+
+For reference, the following is the original use case of the notation, describing `Qahfó'. $\#\left[_\omega \substack{\text{V}\\\text{\nulls}} \left[_\varphi \left[_{\sigma_1} \substack{\text{C}\\\text{P}\cdot\text{L}} \cdot \text{V} \cdot \substack{\text{ʔ}\\\text{ː}} \right] \left[_{\sigma_2} \substack{\text{C}\\\text{P}\cdot\text{L}} \cdot V \right] \substack{\varphi\\\text{\nulls}} \right] \right]\#$; or in a prettier form:
+
+\[
+\#
+\Bigg[_\omega
+\substack{\displaystyle \text{V}\vspace{2pt}\\\displaystyle \text{∅}}
+\bigg[_\varphi
+	\Big[_{\sigma_1}
+		\substack{\displaystyle \text{C  }\vspace{2pt}\\\displaystyle \text{PL  }} 
+		\text{V  } 
+		\substack{\displaystyle \text{ʔ}\vspace{3pt}\\\displaystyle \text{ː}}
+	\Big]
+	\Big[_{\sigma_2}
+		\substack{\displaystyle \text{C  }\vspace{2pt}\\\displaystyle \text{PL  }} 
+		\text{V  } 
+	\Big]
+	\substack{\displaystyle \varphi\vspace{2pt}\\\displaystyle \text{∅}}
+\bigg]
+\Bigg]\# 
+\]
+
+\end{document}
